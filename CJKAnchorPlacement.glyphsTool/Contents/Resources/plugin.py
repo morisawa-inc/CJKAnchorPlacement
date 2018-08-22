@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from GlyphsApp.plugins import *
-from AppKit import NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSValueTransformer
+from AppKit import NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer
 from Foundation import NSNotFound, NSNumber, NSMutableDictionary
 import math
 import collections
@@ -90,6 +90,7 @@ def draw_metrics_rect(font, master, layer, lsb_value, rsb_value, tsb_value, bsb_
     path.setLineWidth_(1.0)
     path.stroke()    
 
+GSInspectorView = objc.lookUpClass('GSInspectorView')
 class CJKAnchorPlacementInspectorView(GSInspectorView):
     
     def acceptsFirstResponder(self):
@@ -151,7 +152,7 @@ class CJKAnchorPlacementTool(SelectTool):
     
     def settings(self):
         self.name = 'CJK Anchor Placement'
-        self.loadNib('InspectorView')
+        self.loadNib('InspectorView', __file__)
         self.setNextResponder_(self.LSBTextField)
         self.LSBTextField.setNextResponder_(self.RSBTextField)
         self.RSBTextField.setNextResponder_(self.TSBTextField)
