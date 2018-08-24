@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+from GlyphsApp import *
 from GlyphsApp.plugins import *
 from AppKit import NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer
 from Foundation import NSNotFound, NSNumber, NSMutableDictionary
