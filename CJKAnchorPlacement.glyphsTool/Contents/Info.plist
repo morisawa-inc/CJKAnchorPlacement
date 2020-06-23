@@ -26,7 +26,7 @@
 	<string>CJKAnchorPlacementTool</string>
 	<key>PyMainFileNames</key>
 	<array>
-		<string>../MacOS/main.py</string>
+		<string>plugin.py</string>
 	</array>
 </dict>
 </plist>

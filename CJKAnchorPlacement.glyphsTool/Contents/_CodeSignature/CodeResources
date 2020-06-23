@@ -27,15 +27,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>MacOS/main.py</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			vyjfI2sch3P3OxQ/R9064q7I4HQ=
-			</data>
-			<key>requirement</key>
-			<string>identifier main and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "662PVPVA3N"</string>
-		</dict>
 		<key>Resources/InspectorView.nib</key>
 		<dict>
 			<key>hash</key>
