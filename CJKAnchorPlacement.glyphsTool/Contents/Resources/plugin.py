@@ -33,14 +33,14 @@ def delete_anchor(font, master, layer, name):
         del layer.anchors[name]
  
 def arrange_anchors(font, master, layer):
-    if layer and layer.anchors:
+    if layer:
         center_x = layer.width / 2.0
         center_y = font.upm / 2.0 + master.descender
         
-        lsb_anchor = layer.anchors['LSB']
-        rsb_anchor = layer.anchors['RSB']
-        tsb_anchor = layer.anchors['TSB']
-        bsb_anchor = layer.anchors['BSB']
+        lsb_anchor = layer.anchors['LSB'] if layer.anchors else None
+        rsb_anchor = layer.anchors['RSB'] if layer.anchors else None
+        tsb_anchor = layer.anchors['TSB'] if layer.anchors else None
+        bsb_anchor = layer.anchors['BSB'] if layer.anchors else None
         
         for anchor in [lsb_anchor, rsb_anchor]:
             if anchor:
@@ -203,11 +203,11 @@ class CJKAnchorPlacementTool(SelectTool):
                 apply_values_for_anchors(font, master, layer, self.LSBValue, self.RSBValue, self.TSBValue, self.BSBValue)
             
     def sync_values(self, font, master, layer):
-        if layer and layer.anchors:
-            lsb_anchor = layer.anchors['LSB']
-            rsb_anchor = layer.anchors['RSB']
-            tsb_anchor = layer.anchors['TSB']
-            bsb_anchor = layer.anchors['BSB']
+        if layer:
+            lsb_anchor = layer.anchors['LSB'] if layer.anchors else None
+            rsb_anchor = layer.anchors['RSB'] if layer.anchors else None
+            tsb_anchor = layer.anchors['TSB'] if layer.anchors else None
+            bsb_anchor = layer.anchors['BSB'] if layer.anchors else None
             self.needs_disable_update_anchors = True
             if lsb_anchor:
                 self.LSBValue = lsb_anchor.position.x
