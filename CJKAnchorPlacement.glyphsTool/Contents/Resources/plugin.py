@@ -91,6 +91,30 @@ def draw_metrics_rect(font, master, layer, lsb_value, rsb_value, tsb_value, bsb_
     path.setLineWidth_(1.0)
     path.stroke()    
 
+def guess_anchor_direction_and_calc_distance_from_edge(location, master, layer):
+    vert_width = layer.vertWidth() if callable(layer.vertWidth) else layer.vertWidth
+    if vert_width is None:
+        vert_width = master.ascender - master.descender
+    bounds = NSMakeRect(0.0, master.ascender - vert_width, layer.width, vert_width)
+    center = NSPoint(bounds.origin.x + bounds.size.width / 2.0, bounds.origin.y + bounds.size.height / 2.0)
+    delta  = NSPoint(location.x - center.x, location.y - center.y)
+    radians = math.atan2(delta.y, delta.x)
+    anchor_name = None
+    distance_from_edge = None
+    if -(math.pi / 4.0) <= radians <= (math.pi / 4.0):
+        anchor_name = 'RSB'
+        distance_from_edge = (bounds.origin.x + bounds.size.width) - location.x
+    elif  (math.pi / 4.0) <= radians <= (math.pi * (3.0 / 4.0)):
+        anchor_name = 'TSB'
+        distance_from_edge = (bounds.origin.y + bounds.size.height) - location.y
+    elif -(math.pi * (3.0 / 4.0)) <= radians <= -(math.pi / 4.0):
+        anchor_name = 'BSB'
+        distance_from_edge = -(bounds.origin.y - location.y)
+    else:
+        anchor_name = 'LSB'
+        distance_from_edge = bounds.origin.x + location.x
+    return anchor_name, distance_from_edge
+
 GSInspectorView = objc.lookUpClass('GSInspectorView')
 class CJKAnchorPlacementInspectorView(GSInspectorView):
     
@@ -159,6 +183,23 @@ class CJKAnchorPlacementTool(SelectTool):
         self.RSBTextField.setNextResponder_(self.TSBTextField)
         self.TSBTextField.setNextResponder_(self.BSBTextField)
         self.BSBTextField.setNextResponder_(None)
+    
+    def mouseDoubleDown_(self, event):
+        view = self.editViewController().graphicView()
+        location = view.getActiveLocation_(event)
+        layer = view.activeLayer()
+        if layer:
+            font = layer.parent.parent
+            master = font.masters[layer.associatedMasterId or layer.layerId]
+            anchor_name, distance_from_edge = guess_anchor_direction_and_calc_distance_from_edge(location, master, layer)
+            if anchor_name == 'LSB':
+                self.LSBValue = distance_from_edge
+            elif anchor_name == 'RSB':
+                self.RSBValue = distance_from_edge
+            elif anchor_name == 'TSB':
+                self.TSBValue = distance_from_edge
+            elif anchor_name == 'BSB':
+                self.BSBValue = distance_from_edge
     
     @LSBValue.setter
     def LSBValue(self, value):
