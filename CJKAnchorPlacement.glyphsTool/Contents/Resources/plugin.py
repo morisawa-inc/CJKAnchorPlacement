@@ -55,6 +55,11 @@ def arrange_anchors(font, master, layer):
 
 def apply_values_for_anchors(font, master, layer, lsb_value, rsb_value, tsb_value, bsb_value):
     if layer:
+        vert_width = layer.vertWidth() if callable(layer.vertWidth) else layer.vertWidth
+        if vert_width is None:
+            vert_width = master.ascender - master.descender
+        ascender, descender = (master.ascender, master.ascender - vert_width)
+
         if lsb_value is not None:
             upsert_anchor(font, master, layer, 'LSB', lsb_value, vertical=False)
         else:
@@ -64,11 +69,11 @@ def apply_values_for_anchors(font, master, layer, lsb_value, rsb_value, tsb_valu
         else:
             delete_anchor(font, master, layer, 'RSB')
         if tsb_value is not None:
-            upsert_anchor(font, master, layer, 'TSB', master.ascender - tsb_value, vertical=True)
+            upsert_anchor(font, master, layer, 'TSB', ascender - tsb_value, vertical=True)
         else:
             delete_anchor(font, master, layer, 'TSB')
         if bsb_value is not None:
-            upsert_anchor(font, master, layer, 'BSB', master.descender + bsb_value, vertical=True)
+            upsert_anchor(font, master, layer, 'BSB', descender + bsb_value, vertical=True)
         else:
             delete_anchor(font, master, layer, 'BSB')
 
@@ -82,10 +87,15 @@ def make_cyan_color():
     return NSColor.colorWithDeviceRed_green_blue_alpha_(0.0 / 256.0, 159.0 / 256.0, 227.0 / 256.0, 1.0)
 
 def draw_metrics_rect(font, master, layer, lsb_value, rsb_value, tsb_value, bsb_value):
+    vert_width = layer.vertWidth() if callable(layer.vertWidth) else layer.vertWidth
+    if vert_width is None:
+        vert_width = master.ascender - master.descender
+    ascender, descender = (master.ascender, master.ascender - vert_width)
+
     x1 = lsb_value or 0.0
     x2 = layer.width - (rsb_value or 0.0)
-    y1 = master.ascender - (tsb_value or 0.0)
-    y2 = master.descender + (bsb_value or 0.0)
+    y1 = ascender - (tsb_value or 0.0)
+    y2 = descender + (bsb_value or 0.0)
     
     path = NSBezierPath.bezierPathWithRect_(NSMakeRect(x1, y2, x2 - x1, y1 - y2))
     path.setLineWidth_(1.0)
@@ -95,7 +105,9 @@ def guess_anchor_direction_and_calc_distance_from_edge(location, master, layer):
     vert_width = layer.vertWidth() if callable(layer.vertWidth) else layer.vertWidth
     if vert_width is None:
         vert_width = master.ascender - master.descender
-    bounds = NSMakeRect(0.0, master.ascender - vert_width, layer.width, vert_width)
+    ascender, descender = (master.ascender, master.ascender - vert_width)
+
+    bounds = NSMakeRect(0.0, descender, layer.width, vert_width)
     center = NSPoint(bounds.origin.x + bounds.size.width / 2.0, bounds.origin.y + bounds.size.height / 2.0)
     delta  = NSPoint(location.x - center.x, location.y - center.y)
     radians = math.atan2(delta.y, delta.x)
