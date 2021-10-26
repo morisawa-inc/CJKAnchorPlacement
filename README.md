@@ -24,6 +24,20 @@ A Glyphs tool plugin that allows you to edit LSB/RSB/TSB/BSB anchors rather intu
 
 ![](CJKAnchorPlacementView.png)
 
+## Tips
+
+By default, the shortcut for this tool is set to the `N` key. If you want to customise it, run the following command in the Terminal:
+
+```
+$ defaults write com.GeorgSeifert.Glyphs2 CJKAnchorPlacementTool.Hotkey 'j'
+```
+
+Make sure to enter the key name you want in lowercase. To reset the shortcut to default, run the following:
+
+```
+$ defaults delete com.GeorgSeifert.Glyphs2 CJKAnchorPlacementTool.Hotkey
+```
+
 ## Requirements
 
 Tested with Glyphs 2.3 on OS X 10.11.

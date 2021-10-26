@@ -195,6 +195,10 @@ class CJKAnchorPlacementTool(SelectTool):
         self.RSBTextField.setNextResponder_(self.TSBTextField)
         self.TSBTextField.setNextResponder_(self.BSBTextField)
         self.BSBTextField.setNextResponder_(None)
+        self.keyboardShortcut = 'n'
+    
+    def trigger(self):
+        return Glyphs.defaults['.'.join((type(self).__name__.replace('NSKVONotifying_', ''), 'Hotkey'))] or self.keyboardShortcut
     
     def mouseDoubleDown_(self, event):
         view = self.editViewController().graphicView()
