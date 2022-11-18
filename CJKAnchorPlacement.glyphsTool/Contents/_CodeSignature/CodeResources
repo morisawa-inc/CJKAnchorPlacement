@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/InspectorView.nib</key>
 		<data>
-		rbsrcpBWdFQP2BsJbC39HeBzrZs=
+		0lLbYgYeAIOK4+a0XhfV6Hpwgx4=
 		</data>
 		<key>Resources/InspectorView.xib</key>
 		<data>
-		L+pbDuhQ2cdpbTdA861HaiuYM+8=
+		wDaCdTv859XGc/PDE+rnqxmTPbs=
 		</data>
 		<key>Resources/plugin.py</key>
 		<data>
@@ -31,22 +31,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rbsrcpBWdFQP2BsJbC39HeBzrZs=
+			0lLbYgYeAIOK4+a0XhfV6Hpwgx4=
 			</data>
 			<key>hash2</key>
 			<data>
-			65yLB1WNOo0YtQ8zu4N+++DOJvXPjv+qq+jvQVMo1KU=
+			8qvWAXSK00SoE8xLQozeq/Ek3+2w0u+AvUHF851gSbU=
 			</data>
 		</dict>
 		<key>Resources/InspectorView.xib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L+pbDuhQ2cdpbTdA861HaiuYM+8=
+			wDaCdTv859XGc/PDE+rnqxmTPbs=
 			</data>
 			<key>hash2</key>
 			<data>
-			AqW+qYiwqlRPBU832UQq5hWIS4qYyF0F4MnPQVZkurk=
+			bQCr5fWSx3Vz9HvHWGjFY/0+2NAgMzPS3yNDhr1wRy0=
 			</data>
 		</dict>
 		<key>Resources/plugin.py</key>
