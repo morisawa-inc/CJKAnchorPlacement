@@ -40,7 +40,7 @@ $ defaults delete com.GeorgSeifert.Glyphs2 CJKAnchorPlacementTool.Hotkey
 
 ## Requirements
 
-Tested with Glyphs 2.3 on OS X 10.11.
+Tested with Glyphs 2.3 on OS X 10.11 and Glyphs 3.1.1 on macOS 10.15.7.
 
 ## License
 

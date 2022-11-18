@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
 from AppKit import NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer
@@ -184,9 +185,11 @@ class CJKAnchorPlacementTool(SelectTool):
     TSBTextField = objc.IBOutlet()
     BSBTextField = objc.IBOutlet()
     
+    @objc.python_method
     def start(self):
         self.needs_disable_update_anchors = False
     
+    @objc.python_method
     def settings(self):
         self.name = 'CJK Anchor Placement'
         self.loadNib('InspectorView', __file__)
@@ -197,6 +200,7 @@ class CJKAnchorPlacementTool(SelectTool):
         self.BSBTextField.setNextResponder_(None)
         self.keyboardShortcut = 'n'
     
+    @objc.python_method
     def trigger(self):
         return Glyphs.defaults['.'.join((type(self).__name__.replace('NSKVONotifying_', ''), 'Hotkey'))] or self.keyboardShortcut
     
@@ -251,6 +255,7 @@ class CJKAnchorPlacementTool(SelectTool):
         self.BSBValue = valueTransformer.transformedValue_(self.BSBTextField.stringValue())
         self.update_anchors()
     
+    @objc.python_method
     def update_anchors(self):
         if not self.needs_disable_update_anchors:
             layer = self.editViewController().graphicView().activeLayer()
@@ -258,7 +263,8 @@ class CJKAnchorPlacementTool(SelectTool):
                 font = layer.parent.parent
                 master = font.masters[layer.associatedMasterId or layer.layerId]
                 apply_values_for_anchors(font, master, layer, self.LSBValue, self.RSBValue, self.TSBValue, self.BSBValue)
-            
+    
+    @objc.python_method
     def sync_values(self, font, master, layer):
         if layer:
             lsb_anchor = layer.anchors['LSB'] if layer.anchors else None
@@ -284,6 +290,7 @@ class CJKAnchorPlacementTool(SelectTool):
                 self.BSBValue = None
             self.needs_disable_update_anchors = False
     
+    @objc.python_method
     def background(self, layer):
         font = layer.parent.parent
         master = font.masters[layer.associatedMasterId or layer.layerId]
@@ -294,5 +301,6 @@ class CJKAnchorPlacementTool(SelectTool):
             make_cyan_color().setStroke()
             draw_metrics_rect(font, master, layer, self.LSBValue, self.RSBValue, self.TSBValue, self.BSBValue)
     
+    @objc.python_method
     def __file__(self):
         return __file__
