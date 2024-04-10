@@ -184,7 +184,8 @@ class CJKAnchorPlacementTool(SelectTool):
     RSBTextField = objc.IBOutlet()
     TSBTextField = objc.IBOutlet()
     BSBTextField = objc.IBOutlet()
-    
+
+
     @objc.python_method
     def start(self):
         self.needs_disable_update_anchors = False
@@ -199,7 +200,11 @@ class CJKAnchorPlacementTool(SelectTool):
         self.TSBTextField.setNextResponder_(self.BSBTextField)
         self.BSBTextField.setNextResponder_(None)
         self.keyboardShortcut = 'n'
-    
+        self.LSBTextField.setNextKeyView_(self.RSBTextField)
+        self.RSBTextField.setNextKeyView_(self.TSBTextField)
+        self.TSBTextField.setNextKeyView_(self.BSBTextField)
+        self.BSBTextField.setNextKeyView_(None)
+        
     @objc.python_method
     def trigger(self):
         return Glyphs.defaults['.'.join((type(self).__name__.replace('NSKVONotifying_', ''), 'Hotkey'))] or self.keyboardShortcut
