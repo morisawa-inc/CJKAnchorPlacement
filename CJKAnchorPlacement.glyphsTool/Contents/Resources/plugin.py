@@ -3,7 +3,7 @@
 import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
-from AppKit import NSApplication, NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer, NSLeftMouseDown, NSLeftMouseUp, NSMouseMoved, NSLeftMouseDragged 
+from AppKit import NSApplication, NSGraphicsContext, NSFont, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer, NSLeftMouseDown, NSLeftMouseUp, NSMouseMoved, NSLeftMouseDragged
 
 from Foundation import NSNotFound, NSNumber, NSMutableDictionary
 import math
@@ -182,6 +182,7 @@ class CJKAnchorPlacementValueTransformer(NSValueTransformer):
 class CJKAnchorPlacementTool(SelectTool):
     
     inspectorDialogView = objc.IBOutlet()
+    exampleCharacterTextField = objc.IBOutlet()
     
     LSBValue = objc.object_property()
     RSBValue = objc.object_property()
@@ -216,6 +217,8 @@ class CJKAnchorPlacementTool(SelectTool):
         self.TSBTextField.setNextKeyView_(self.BSBTextField)
         self.BSBTextField.setNextKeyView_(None)
         
+        self.exampleCharacterTextField.setFont_(NSFont.boldSystemFontOfSize_(24.0))
+    
     @objc.python_method
     def trigger(self):
         return Glyphs.defaults['.'.join((type(self).__name__.replace('NSKVONotifying_', ''), 'Hotkey'))] or self.keyboardShortcut
