@@ -236,7 +236,7 @@ class CJKAnchorPlacementTool(SelectTool):
         try:
             super(CJKAnchorPlacementTool, self).mouseDoubleDown_(event)
         except AttributeError as e:
-            LogError(e) # Some encounter AttributeError while I cannot reproduce it.
+            LogError(repr(e)) # Some encounter AttributeError while I cannot reproduce it.
     
     @LSBValue.setter
     def LSBValue(self, value):
