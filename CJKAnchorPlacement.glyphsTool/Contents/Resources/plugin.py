@@ -233,10 +233,7 @@ class CJKAnchorPlacementTool(SelectTool):
                 elif anchor_name == 'BSB':
                     self.BSBValue = distance_from_edge
                 return
-        try:
-            super(CJKAnchorPlacementTool, self).mouseDoubleDown_(event)
-        except AttributeError as e:
-            LogError(repr(e)) # Some encounter AttributeError while I cannot reproduce it.
+        objc.super(CJKAnchorPlacementTool, self).mouseDoubleDown_(event)
     
     @LSBValue.setter
     def LSBValue(self, value):
