@@ -3,11 +3,14 @@
 import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
-from AppKit import NSApplication, NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer, NSEventTypeLeftMouseDown, NSEventTypeLeftMouseDragged, NSEventTypeMouseMoved, NSEventTypeLeftMouseUp, NSEventTypePressure, NSEventTypeTabletPoint
+from AppKit import NSApplication, NSGraphicsContext, NSColor, NSMakeRect, NSInsetRect, NSMakePoint, NSAlternateKeyMask, NSBeep, NSNumberFormatter, NSValueTransformer, NSLeftMouseDown, NSLeftMouseUp, NSMouseMoved, NSLeftMouseDragged 
+
 from Foundation import NSNotFound, NSNumber, NSMutableDictionary
 import math
 import collections
 import contextlib
+
+VALID_EVENT_TYPES = (NSLeftMouseDown, NSLeftMouseUp, NSMouseMoved, NSLeftMouseDragged)
 
 @contextlib.contextmanager
 def currentGraphicsContext(context=None):
@@ -321,10 +324,9 @@ class CJKAnchorPlacementTool(SelectTool):
         font = layer.parent.parent
         master = font.masters[layer.associatedMasterId or layer.layerId]
         event = NSApplication.sharedApplication().currentEvent()
-        valid_event_types = (NSEventTypeLeftMouseDragged, NSEventTypeMouseMoved, NSEventTypeLeftMouseUp, NSEventTypePressure, NSEventTypeTabletPoint)
         arrange_anchors(font, master, layer)
         self.update_grid_subdivision(event)
-        self.sync_values(font, master, layer, needs_round=event.type() in valid_event_types if event else False)
+        self.sync_values(font, master, layer, needs_round=event.type() in VALID_EVENT_TYPES if event else False)
         with currentGraphicsContext() as ctx:
             dotted = False
             has_unbalanced_palt = sum((1 if value is None else 0 for value in (self.LSBValue, self.RSBValue))) == 1
