@@ -207,15 +207,11 @@ class CJKAnchorPlacementTool(SelectTool):
         self.name = 'CJK Anchor Placement'
         self.loadNib('InspectorView', __file__)
         self.setNextResponder_(self.LSBTextField)
-        self.LSBTextField.setNextResponder_(self.RSBTextField)
-        self.RSBTextField.setNextResponder_(self.TSBTextField)
-        self.TSBTextField.setNextResponder_(self.BSBTextField)
-        self.BSBTextField.setNextResponder_(None)
         self.keyboardShortcut = 'n'
         self.LSBTextField.setNextKeyView_(self.RSBTextField)
         self.RSBTextField.setNextKeyView_(self.TSBTextField)
         self.TSBTextField.setNextKeyView_(self.BSBTextField)
-        self.BSBTextField.setNextKeyView_(None)
+        self.BSBTextField.setNextKeyView_(self.LSBTextField)
         
         self.exampleCharacterTextField.setFont_(NSFont.boldSystemFontOfSize_(24.0))
     
