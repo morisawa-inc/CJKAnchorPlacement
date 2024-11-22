@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,6 +11,7 @@
                 <outlet property="LSBTextField" destination="XZP-wI-q1m" id="KaL-BR-xsp"/>
                 <outlet property="RSBTextField" destination="cJB-LX-plY" id="MXr-Jw-Vf6"/>
                 <outlet property="TSBTextField" destination="RG0-cs-2bP" id="hqQ-e7-dwN"/>
+                <outlet property="exampleCharacterTextField" destination="roN-Ze-puh" id="0rR-xa-Ge5"/>
                 <outlet property="inspectorDialog" destination="c22-O7-iKe" id="CKH-tl-QMI"/>
                 <outlet property="inspectorDialogView" destination="c22-O7-iKe" id="PzC-P5-UUN"/>
             </connections>
@@ -20,7 +21,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="c22-O7-iKe" customClass="CJKAnchorPlacementInspectorView">
             <rect key="frame" x="0.0" y="0.0" width="115" height="81"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XZP-wI-q1m" customClass="GSSteppingTextField">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XZP-wI-q1m" customClass="GSSteppingTextField">
                     <rect key="frame" x="8" y="30" width="36" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="YGx-NR-XHW"/>
@@ -43,7 +44,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-LX-plY" customClass="GSSteppingTextField">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-LX-plY" customClass="GSSteppingTextField">
                     <rect key="frame" x="69" y="38" width="36" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="lrZ-3n-Okd"/>
@@ -66,7 +67,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-cs-2bP" customClass="GSSteppingTextField">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-cs-2bP" customClass="GSSteppingTextField">
                     <rect key="frame" x="56" y="54" width="36" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="ah4-NF-HEh"/>
@@ -89,7 +90,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kjB-6o-Mhg" customClass="GSSteppingTextField">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kjB-6o-Mhg" customClass="GSSteppingTextField">
                     <rect key="frame" x="24" y="15" width="36" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="x7P-jk-8nt"/>
@@ -112,7 +113,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="roN-Ze-puh">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="roN-Ze-puh">
                     <rect key="frame" x="44" y="27" width="27" height="28"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="あ" id="E7D-Cm-pCA">
                         <font key="font" metaFont="systemBold" size="24"/>
